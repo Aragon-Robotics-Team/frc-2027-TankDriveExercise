@@ -16,18 +16,18 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.constants.DriveConstants;
+import frc.robot.constants.SteerConstants;
 
 public class SwerveSteer extends SubsystemBase {
-  private TalonFX m_frontLeftMotor = new TalonFX(DriveConstants.kFrontLeftTurnID);
-  private TalonFX m_frontRightMotor = new TalonFX(DriveConstants.kFrontRightTurnID);
-  private TalonFX m_backLeftMotor = new TalonFX(DriveConstants.kBackLeftTurnID);
-  private TalonFX m_backRightMotor = new TalonFX(DriveConstants.kBackRightTurnID);
+  private TalonFX m_frontLeftMotor = new TalonFX(SteerConstants.kFrontLeftTurnID);
+  private TalonFX m_frontRightMotor = new TalonFX(SteerConstants.kFrontRightTurnID);
+  private TalonFX m_backLeftMotor = new TalonFX(SteerConstants.kBackLeftTurnID);
+  private TalonFX m_backRightMotor = new TalonFX(SteerConstants.kBackRightTurnID);
 
-  public final DutyCycleEncoder m_frontLeftAbsoluteEncoder = new DutyCycleEncoder(DriveConstants.kFrontLeftAbsoluteEncoderPort, 2.0 * Math.PI, DriveConstants.kFrontLeftEncoderOffset);
-  public final DutyCycleEncoder m_frontRightAbsoluteEncoder = new DutyCycleEncoder(DriveConstants.kFrontRightAbsoluteEncoderPort, 2.0 * Math.PI, DriveConstants.kFrontRightEncoderOffset);
-  public final DutyCycleEncoder m_backLeftAbsoluteEncoder = new DutyCycleEncoder(DriveConstants.kBackLeftAbsoluteEncoderPort, 2.0 * Math.PI, DriveConstants.kBackLeftEncoderOffset);
-  public final DutyCycleEncoder m_backRightAbsoluteEncoder = new DutyCycleEncoder(DriveConstants.kBackRightAbsoluteEncoderPort, 2.0 * Math.PI, DriveConstants.kBackRightEncoderOffset);
+  public final DutyCycleEncoder m_frontLeftAbsoluteEncoder = new DutyCycleEncoder(SteerConstants.kFrontLeftAbsoluteEncoderPort, 2.0 * Math.PI, SteerConstants.kFrontLeftEncoderOffset);
+  public final DutyCycleEncoder m_frontRightAbsoluteEncoder = new DutyCycleEncoder(SteerConstants.kFrontRightAbsoluteEncoderPort, 2.0 * Math.PI, SteerConstants.kFrontRightEncoderOffset);
+  public final DutyCycleEncoder m_backLeftAbsoluteEncoder = new DutyCycleEncoder(SteerConstants.kBackLeftAbsoluteEncoderPort, 2.0 * Math.PI, SteerConstants.kBackLeftEncoderOffset);
+  public final DutyCycleEncoder m_backRightAbsoluteEncoder = new DutyCycleEncoder(SteerConstants.kBackRightAbsoluteEncoderPort, 2.0 * Math.PI, SteerConstants.kBackRightEncoderOffset);
 
   private final DutyCycleOut m_turnMotorInput = new DutyCycleOut(0);
 
@@ -37,7 +37,7 @@ public class SwerveSteer extends SubsystemBase {
   /** Creates a new SwerveSteer. */
   public SwerveSteer() {
     for (int i = 0; i < 4; i++) {
-      m_turnPID[i] = new PIDController(DriveConstants.kPTurn, DriveConstants.kITurn, DriveConstants.kDTurn);
+      m_turnPID[i] = new PIDController(SteerConstants.kPTurn, SteerConstants.kITurn, SteerConstants.kDTurn);
       m_turnPID[i].setTolerance(0);
       m_turnPID[i].enableContinuousInput(-Math.PI, Math.PI);
     }
