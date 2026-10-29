@@ -1,6 +1,6 @@
 package frc.robot.constants;
 
-public class DriveConstants {
+public class SteerConstants {
     public static final int kFrontLeftTurnID = 14;
     public static final int kFrontRightTurnID = 11;
     public static final int kBackLeftTurnID = 12;
