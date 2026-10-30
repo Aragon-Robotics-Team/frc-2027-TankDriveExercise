@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.constants.DrivetrainConstants;
 import frc.robot.constants.IOConstants;
 import frc.robot.subsystems.Drivetrain;
 
@@ -32,8 +33,8 @@ public class ArcadeDrivetrain extends Command {
     double turn = m_driveController.getRawAxis(IOConstants.kXAxis);
     double leftDutyCycle = forward + turn;
     double rightDutyCycle = forward - turn;
-    leftDutyCycle *= IOConstants.kSpeedMultiplier;
-    rightDutyCycle *= IOConstants.kSpeedMultiplier;
+    leftDutyCycle *= DrivetrainConstants.kSpeedMultiplier;
+    rightDutyCycle *= DrivetrainConstants.kSpeedMultiplier;
     m_drivetrain.setLeftDutyCycle(leftDutyCycle);
     m_drivetrain.setRightDutyCycle(rightDutyCycle);
   }

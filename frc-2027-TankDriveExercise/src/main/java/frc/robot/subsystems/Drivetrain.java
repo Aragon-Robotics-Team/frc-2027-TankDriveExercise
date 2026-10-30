@@ -54,11 +54,11 @@ public class Drivetrain extends SubsystemBase {
     m_backLeftMotorID.set(dutyCycle);
   }
 
-  public double getFrontLeftDutyCycle(double dutyCycle) {
+  public double getFrontLeftDutyCycle() {
     return m_frontLeftMotorID.get();
   }
 
-  public double getBackLeftDutyCycle(double dutyCycle) {
+  public double getBackLeftDutyCycle() {
     return m_backLeftMotorID.get();
   }
 
@@ -67,11 +67,11 @@ public class Drivetrain extends SubsystemBase {
     m_backRightMotorID.setVoltage(dutyCycle);
   }
 
-  public double getFrontRightDutyCycle(double dutyCycle) {
+  public double getFrontRightDutyCycle() {
     return m_frontRightMotorID.get();
   }
 
-  public double getBackRightDutyCycle(double dutyCycle) {
+  public double getBackRightDutyCycle() {
     return m_backRightMotorID.get();
   }
 }
