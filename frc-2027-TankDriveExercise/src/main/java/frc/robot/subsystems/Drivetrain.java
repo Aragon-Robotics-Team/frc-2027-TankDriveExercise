@@ -63,8 +63,8 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void setRightDutyCycle(double dutyCycle) {
-    m_frontRightMotorID.setVoltage(dutyCycle);
-    m_backRightMotorID.setVoltage(dutyCycle);
+    m_frontRightMotorID.set(dutyCycle);
+    m_backRightMotorID.set(dutyCycle);
   }
 
   public double getFrontRightDutyCycle() {
