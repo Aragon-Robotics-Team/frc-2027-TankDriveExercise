@@ -5,7 +5,6 @@ public class DrivetrainConstants {
     final public static int kFrontRightMotorID = 1;
     final public static int kBackLeftMotorID = 2;
     final public static int kBackRightMotorID = 3;
-    final public static int kDriverControllerPort = 0;
     public static final double kSpeedMultiplier = 0.2;
-
+    public static final double kFinalTime = 0.0;
 }
