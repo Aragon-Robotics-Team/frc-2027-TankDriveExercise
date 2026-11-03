@@ -19,7 +19,7 @@ public class MoveForTime extends Command {
   /** Creates a new MoveDrivetrainForTime. */
   JoystickButton m_driveForTimeButton;
   Timer m_timer = new Timer();
-  double m_time = 0.0;
+  double m_time;
   Drivetrain m_drivetrain = new Drivetrain();
   public MoveForTime(double time, Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -39,8 +39,8 @@ public class MoveForTime extends Command {
   @Override
   public void execute() {
     if (isFinished() == false){
-      m_drivetrain.setLeftDutyCycle(0.3);
-      m_drivetrain.setRightDutyCycle(0.3);
+      m_drivetrain.setLeftDutyCycle(0.2);
+      m_drivetrain.setRightDutyCycle(0.2);
     }  
   }
 
