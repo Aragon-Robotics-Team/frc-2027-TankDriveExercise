@@ -6,5 +6,5 @@ public class IOConstants {
     public static final int kXAxis = 4;
     public static final int kDriverControllerPort = 0;
     public static final int kDriveForTimeButton = 3;
-
+    public static final int kBangBangButton = 4;
 }

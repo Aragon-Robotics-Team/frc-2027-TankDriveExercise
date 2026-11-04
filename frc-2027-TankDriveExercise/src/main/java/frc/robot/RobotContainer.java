@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrivetrain;
+import frc.robot.commands.BangBangDrivetrain;
 import frc.robot.commands.LockWheels;
 import frc.robot.commands.MoveForTime;
 import frc.robot.constants.DrivetrainConstants;
@@ -25,6 +26,8 @@ public class RobotContainer {
   private ArcadeDrivetrain m_arcadeDrivetrain = new ArcadeDrivetrain(m_drivetrain, m_driverController);
   private MoveForTime m_moveForTime = new MoveForTime(DrivetrainConstants.kFinalTime, m_drivetrain);
   private JoystickButton m_driveForTimeButton = new JoystickButton(m_driverController, IOConstants.kDriveForTimeButton);
+  private JoystickButton m_bangBangButton = new JoystickButton(m_driverController, IOConstants.kBangBangButton);
+  private BangBangDrivetrain m_bangBangDrivetrain = new BangBangDrivetrain(m_drivetrain, DrivetrainConstants.kTargetDistance); 
   public RobotContainer() {
     configureBindings();
   }
@@ -33,6 +36,7 @@ public class RobotContainer {
     m_swerveSteer.setDefaultCommand(m_lockWheels);
     m_drivetrain.setDefaultCommand(m_arcadeDrivetrain);
     m_driveForTimeButton.whileTrue(m_moveForTime);
+    m_bangBangButton.whileTrue(m_bangBangDrivetrain);
   }
 
   public Command getAutonomousCommand() {
