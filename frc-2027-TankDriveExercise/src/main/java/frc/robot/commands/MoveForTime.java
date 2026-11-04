@@ -17,10 +17,10 @@ import frc.robot.subsystems.Drivetrain;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class MoveForTime extends Command {
   /** Creates a new MoveDrivetrainForTime. */
-  JoystickButton m_driveForTimeButton;
-  Timer m_timer = new Timer();
-  double m_time;
-  Drivetrain m_drivetrain = new Drivetrain();
+  private JoystickButton m_driveForTimeButton;
+  private Timer m_timer = new Timer();
+  private double m_time;
+  private Drivetrain m_drivetrain = new Drivetrain();
   public MoveForTime(double time, Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_time = time;
@@ -38,10 +38,8 @@ public class MoveForTime extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (isFinished() == false){
-      m_drivetrain.setLeftDutyCycle(0.2);
-      m_drivetrain.setRightDutyCycle(0.2);
-    }  
+    m_drivetrain.setLeftDutyCycle(0.2);
+    m_drivetrain.setRightDutyCycle(0.2);
   }
 
   // Called once the command ends or is interrupted.
