@@ -40,10 +40,10 @@ public class Drivetrain extends SubsystemBase {
   m_backRightMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
   m_frontLeftMotorConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
   m_frontRightMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-  m_frontLeftMotorConfig.Feedback.SensorToMechanismRatio = (1/5.90026);
-  m_frontRightMotorConfig.Feedback.SensorToMechanismRatio = (1/6.7480);
-  m_backLeftMotorConfig.Feedback.SensorToMechanismRatio = (1/6.7460);
-  m_backRightMotorConfig.Feedback.SensorToMechanismRatio = (1/6.7460);
+  m_frontLeftMotorConfig.Feedback.SensorToMechanismRatio = (5.90026);
+  m_frontRightMotorConfig.Feedback.SensorToMechanismRatio = (6.7480);
+  m_backLeftMotorConfig.Feedback.SensorToMechanismRatio = (6.7460);
+  m_backRightMotorConfig.Feedback.SensorToMechanismRatio = (6.7460);
   m_frontLeftMotor.getConfigurator().apply(m_frontLeftMotorConfig);
   m_frontRightMotor.getConfigurator().apply(m_frontRightMotorConfig);
   m_backLeftMotor.getConfigurator().apply(m_backLeftMotorConfig);
