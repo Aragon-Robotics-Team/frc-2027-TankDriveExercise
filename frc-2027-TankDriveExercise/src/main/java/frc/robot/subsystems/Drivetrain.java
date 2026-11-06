@@ -57,6 +57,7 @@ public class Drivetrain extends SubsystemBase {
     Logger.recordOutput("Drivetrain/FrontRightDutyCycle", m_frontRightMotor.get());
     Logger.recordOutput("Drivetrain/BackLeftDutyCycle", m_backLeftMotor.get());
     Logger.recordOutput("Drivetrain/BackRightDutyCycle", m_backRightMotor.get());
+    Logger.recordOutput("Drivetrain/DistanceTraveled", getFrontRightDistanceTraveled());
   }
 
   public void setLeftDutyCycle(double dutyCycle) {

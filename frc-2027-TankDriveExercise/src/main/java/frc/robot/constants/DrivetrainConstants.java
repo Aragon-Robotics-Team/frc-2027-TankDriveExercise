@@ -8,5 +8,5 @@ public class DrivetrainConstants {
     public static final double kSpeedMultiplier = 0.2;
     public static final double kFinalTime = 10;
     public static final double kWheelRadius = 0.0508;
-    public static final double kTargetDistance = 1.0;
+    public static final double kTargetDistance = 2.0;
 }
