@@ -11,7 +11,7 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import org.littletonrobotics.junction.Logger;
 
-
+import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Voltage;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.DrivetrainConstants;
@@ -29,6 +29,11 @@ public class Drivetrain extends SubsystemBase {
   private StatusSignal<Voltage> m_backLeftVoltage = m_frontLeftMotor.getMotorVoltage();
   private StatusSignal<Voltage> m_frontRightVoltage = m_frontLeftMotor.getMotorVoltage();
   private StatusSignal<Voltage> m_backRightVoltage = m_frontLeftMotor.getMotorVoltage();
+
+  private StatusSignal<Angle> m_frontLeftMotorStatusSignal = m_frontLeftMotor.getPosition();
+  private StatusSignal<Angle> m_frontRightMotorStatusSignal = m_frontRightMotor.getPosition();
+  private StatusSignal<Angle> m_backLeftMotorStatusSignal = m_backLeftMotor.getPosition();
+  private StatusSignal<Angle> m_backRightMotorStatusSignal = m_backRightMotor.getPosition();
 
   private TalonFXConfiguration m_frontLeftMotorConfig = new TalonFXConfiguration();
   private TalonFXConfiguration m_frontRightMotorConfig = new TalonFXConfiguration();
@@ -48,6 +53,11 @@ public class Drivetrain extends SubsystemBase {
     m_frontLeftMotorConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     m_frontRightMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
+    m_frontLeftMotorConfig.Feedback.SensorToMechanismRatio = 2 * Math.PI * DrivetrainConstants.kWheelRadius / 0.0508;
+    m_frontRightMotorConfig.Feedback.SensorToMechanismRatio = 2 * Math.PI * DrivetrainConstants.kWheelRadius / 6.7480;
+    m_backLeftMotorConfig.Feedback.SensorToMechanismRatio = 2 * Math.PI * DrivetrainConstants.kWheelRadius / 6.7480;
+    m_backRightMotorConfig.Feedback.SensorToMechanismRatio = 2 * Math.PI * DrivetrainConstants.kWheelRadius / 6.7480;
+
     m_backLeftMotor.getConfigurator().apply(m_backLeftMotorConfig);
     m_backRightMotor.getConfigurator().apply(m_frontRightMotorConfig);
     m_frontLeftMotor.getConfigurator().apply(m_frontLeftMotorConfig);
@@ -62,6 +72,8 @@ public class Drivetrain extends SubsystemBase {
     Logger.recordOutput("backRightMotorSpeed", getBackRightDutyCycle());
     Logger.recordOutput("frontRightMotorSpeed", getFrontRightDutyCycle());
 
+    Logger.recordOutput("currentPosition", getFrontLeftStatusSignal());
+    Logger.recordOutput("targetPosition", getFrontLeftStatusSignal() + DrivetrainConstants.kTargetDistance);
   }
 
   
@@ -74,6 +86,7 @@ public class Drivetrain extends SubsystemBase {
     m_backRightMotor.setVoltage(rightVoltage);
     m_frontRightMotor.setVoltage(rightVoltage);
   }
+
 
   public double getFrontLeftVoltage() {
     return m_frontLeftVoltage.refresh().getValueAsDouble();
@@ -115,6 +128,22 @@ public class Drivetrain extends SubsystemBase {
 
   public double getFrontLeftDutyCycle() {
     return m_frontLeftMotor.get();
+  }
+
+  public double getFrontLeftStatusSignal() {
+    return m_frontLeftMotorStatusSignal.refresh().getValueAsDouble();
+  }
+  
+  public double getFrontRightStatusSignal() {
+    return m_frontRightMotorStatusSignal.refresh().getValueAsDouble();
+  }
+
+  public double getBackLeftStatusSignal() {
+    return m_backLeftMotorStatusSignal.refresh().getValueAsDouble();
+  }
+
+  public double getBackRightStatusSignal() {
+    return m_backRightMotorStatusSignal.refresh().getValueAsDouble();
   }
 
 }
