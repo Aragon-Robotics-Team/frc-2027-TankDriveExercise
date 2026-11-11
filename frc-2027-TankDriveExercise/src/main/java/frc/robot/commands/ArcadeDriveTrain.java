@@ -33,7 +33,7 @@ public class ArcadeDriveTrain extends Command {
   public void execute() {
 
     double front = -m_Controller.getRawAxis(IOConstants.kYAxis);
-    double back = -m_Controller.getRawAxis(IOConstants.kXAxis);
+    double back = m_Controller.getRawAxis(IOConstants.kXAxis);
     double left = front + back;
     double right = front - back;
     
@@ -41,6 +41,9 @@ public class ArcadeDriveTrain extends Command {
     left *= IOConstants.kSpeedMultiplier;
     right *= IOConstants.kSpeedMultiplier;
     
+    m_drivetrain.setLeftSpeed(left);
+    m_drivetrain.setRightSpeed(-right);
+
 
     }
 

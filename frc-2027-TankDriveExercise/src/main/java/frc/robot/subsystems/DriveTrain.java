@@ -10,12 +10,14 @@ import javax.security.auth.login.LoginException;
 
 import org.littletonrobotics.junction.Logger;
 
+import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.hal.FRCNetComm.tInstances;
+import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.DriveConstants;  
 
@@ -29,6 +31,14 @@ public class DriveTrain extends SubsystemBase {
    private TalonFXConfiguration m_frontRightConfiguration = new TalonFXConfiguration();
    private TalonFXConfiguration m_backRightConfiguration = new TalonFXConfiguration();
    private TalonFXConfiguration m_backLeftConfiguration = new TalonFXConfiguration();
+
+   private StatusSignal<Angle> m_statusSignalFrontLeft = m_frontLeft.getPosition();
+   private StatusSignal<Angle> m_statusSignalBackLeft = m_backLeft.getPosition();
+   private StatusSignal<Angle> m_statusSignalFrontRight = m_frontRight.getPosition();
+   private StatusSignal<Angle> m_statusSignalBackRight = m_backRight.getPosition();
+  
+
+
   /** Creates a new DriveTrain. */
   public DriveTrain() {
    m_backLeftConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Brake;
@@ -41,10 +51,17 @@ public class DriveTrain extends SubsystemBase {
   m_frontLeftConfiguration.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
   m_frontRightConfiguration.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
+  m_frontLeftConfiguration.Feedback.SensorToMechanismRatio = 1.0 / (2.0 * Math.PI * DriveConstants.kWheelRadius) * 5.9028;
+  m_frontRightConfiguration.Feedback.SensorToMechanismRatio = 1.0 / (2.0 * Math.PI * DriveConstants.kWheelRadius) * 6.7480;
+  m_backRightConfiguration.Feedback.SensorToMechanismRatio = 1.0 / (2.0 * Math.PI * DriveConstants.kWheelRadius) * 6.7480;
+  m_backLeftConfiguration.Feedback.SensorToMechanismRatio = 1.0 / (2.0 * Math.PI * DriveConstants.kWheelRadius) * 6.7480;
+
   m_frontLeft.getConfigurator().apply(m_frontLeftConfiguration);
   m_backLeft.getConfigurator().apply(m_backLeftConfiguration);
   m_frontRight.getConfigurator().apply(m_frontRightConfiguration);
   m_backRight.getConfigurator().apply(m_backRightConfiguration);
+
+
   }
 
   @Override
@@ -53,6 +70,11 @@ public class DriveTrain extends SubsystemBase {
     Logger.recordOutput("frontLeftMotorSpeed", getFrontLeft());
     Logger.recordOutput("backRightMotorSpeed", getBackRight());
     Logger.recordOutput("frontRightMotorSpeed", getFrontRight());
+
+    
+
+    
+
 
     // This method will be called once per scheduler run
   }
@@ -83,4 +105,19 @@ public class DriveTrain extends SubsystemBase {
     return m_frontRight.get();
   }
 
+  public double getDistanceTraveledFrontLeft(){
+    return m_statusSignalFrontLeft.refresh().getValueAsDouble();
+  }
+
+  public double getDistanceTraveledBackLeft(){
+  return m_statusSignalBackLeft.refresh().getValueAsDouble();
+  }
+
+  public double getDistanceTraveledFrontRight(){
+  return m_statusSignalFrontRight.refresh().getValueAsDouble();
+  }
+
+  public double getDistanceTraveledBackRight(){
+    return m_statusSignalBackRight.refresh().getValueAsDouble();
+  }
 }
