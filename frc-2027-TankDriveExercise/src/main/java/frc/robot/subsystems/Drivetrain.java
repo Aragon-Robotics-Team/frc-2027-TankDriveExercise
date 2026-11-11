@@ -4,11 +4,13 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.ArcadeDrivetrain;
 import frc.robot.constants.DrivetrainConstants;
@@ -18,6 +20,10 @@ public class Drivetrain extends SubsystemBase {
   private TalonFX m_motorFrontRight = new TalonFX(DrivetrainConstants.kFrontRightID);
   private TalonFX m_motorBottomLeft = new TalonFX(DrivetrainConstants.kBottomLeftID);
   private TalonFX m_motorBottomRight = new TalonFX(DrivetrainConstants.kBottomRightID);
+  private StatusSignal<Angle> m_statusSignalFrontLeft = m_motorFrontLeft.getPosition();
+  private StatusSignal<Angle> m_statusSignalFrontRight = m_motorFrontRight.getPosition();
+  private StatusSignal<Angle> m_statusSignalBottomLeft = m_motorBottomLeft.getPosition();
+  private StatusSignal<Angle> m_statusSignalBottomRight = m_motorBottomRight.getPosition();
  
   public Drivetrain() {
     TalonFXConfiguration m_FrontLeftConfig = new TalonFXConfiguration();
@@ -25,10 +31,10 @@ public class Drivetrain extends SubsystemBase {
     TalonFXConfiguration m_BottomLeftConfig = new TalonFXConfiguration();
     TalonFXConfiguration m_BottomRightConfig = new TalonFXConfiguration();
 
-    m_FrontLeftConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    m_FrontRightConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    m_BottomLeftConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    m_BottomRightConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    m_FrontLeftConfig.Feedback.SensorToMechanismRatio = 1.0 / (2 * Math.PI * 0.0508) * 5.9028;
+    m_FrontRightConfig.Feedback.SensorToMechanismRatio = 1.0 / (2 * Math.PI * 0.0508) * 6.7460;
+    m_BottomLeftConfig.Feedback.SensorToMechanismRatio = 1.0 / (2 * Math.PI * 0.0508) * 6.7460; 
+    m_BottomRightConfig.Feedback.SensorToMechanismRatio = 1.0 / (2 * Math.PI * 0.0508) * 6.7460;
 
     m_FrontLeftConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     m_FrontRightConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
@@ -73,9 +79,14 @@ public class Drivetrain extends SubsystemBase {
     public double getRightSpeed() {
       return m_motorFrontRight.get();
     }
+    public double getBottomLeftPosition() {
+      return m_statusSignalBottomLeft.refresh().getValueAsDouble();
+    }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
 }
+
+

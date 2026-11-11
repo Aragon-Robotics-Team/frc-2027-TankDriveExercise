@@ -8,4 +8,5 @@ package frc.robot.constants;
 public class IOConstants {
         public static final int kXAxisID = 0;
         public static final int kYAxisID = 1;
+        public static final int kButtonID = 1;
 }

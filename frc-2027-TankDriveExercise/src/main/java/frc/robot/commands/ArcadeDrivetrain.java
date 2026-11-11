@@ -11,7 +11,7 @@ import frc.robot.constants.IOConstants;
 import frc.robot.subsystems.Drivetrain;
 
 /* You should consider using the more terse Command factories API instead cd https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ArcadeDrivetrain extends Command {
+public class ArcadeDrivetrain extends Command  {
   private XboxController m_xBoxController;
   private Drivetrain m_Drivetrain;
   private double m_speedright;

@@ -11,4 +11,9 @@ public class DrivetrainConstants {
     public static final int kBottomLeftID = 2;
     public static final int kBottomRightID = 3;
     public static final double kMultiplier = 0.1;   
+    public static final double kTargetTime = 5;
+    public static final double kTargetDistance = 2;
+    public static final double kP = 0.3;
+    public static final double kI = 0;
+    public static final double kD = 0;
 }
