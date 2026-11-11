@@ -53,11 +53,12 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    Logger.recordOutput("Drivetrain/FrontLeftDutyCycle", m_frontLeftMotor.get());
-    Logger.recordOutput("Drivetrain/FrontRightDutyCycle", m_frontRightMotor.get());
-    Logger.recordOutput("Drivetrain/BackLeftDutyCycle", m_backLeftMotor.get());
-    Logger.recordOutput("Drivetrain/BackRightDutyCycle", m_backRightMotor.get());
-    Logger.recordOutput("Drivetrain/DistanceTraveled", getFrontRightDistanceTraveled());
+    Logger.recordOutput("Drivetrain/frontLeftDutyCycle", m_frontLeftMotor.get());
+    Logger.recordOutput("Drivetrain/frontRightDutyCycle", m_frontRightMotor.get());
+    Logger.recordOutput("Drivetrain/backLeftDutyCycle", m_backLeftMotor.get());
+    Logger.recordOutput("Drivetrain/backRightDutyCycle", m_backRightMotor.get());
+    Logger.recordOutput("Drivetrain/currentPosition", getBackLeftDistanceTraveled());
+    Logger.recordOutput("Drivetrain/targetPosition", getBackLeftDistanceTraveled() + DrivetrainConstants.kTargetDistance);
   }
 
   public void setLeftDutyCycle(double dutyCycle) {

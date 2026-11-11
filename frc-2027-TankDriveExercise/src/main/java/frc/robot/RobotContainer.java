@@ -13,10 +13,12 @@ import frc.robot.commands.ArcadeDrivetrain;
 import frc.robot.commands.BangBangDrivetrain;
 import frc.robot.commands.LockWheels;
 import frc.robot.commands.MoveForTime;
+import frc.robot.commands.MoveWithPID;
 import frc.robot.constants.DrivetrainConstants;
 import frc.robot.constants.IOConstants;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.SwerveSteer;
+import frc.robot.subsystems.TuningModule;
 
 public class RobotContainer {
   private SwerveSteer m_swerveSteer = new SwerveSteer();
@@ -28,6 +30,8 @@ public class RobotContainer {
   private JoystickButton m_driveForTimeButton = new JoystickButton(m_driverController, IOConstants.kDriveForTimeButton);
   private JoystickButton m_bangBangButton = new JoystickButton(m_driverController, IOConstants.kBangBangButton);
   private BangBangDrivetrain m_bangBangDrivetrain = new BangBangDrivetrain(m_drivetrain, DrivetrainConstants.kTargetDistance); 
+  private JoystickButton m_moveWithPIDButton = new JoystickButton(m_driverController, IOConstants.kMoveWithPIDButton);
+  private MoveWithPID m_moveWithPID = new MoveWithPID(m_drivetrain);
   public RobotContainer() {
     configureBindings();
   }
@@ -37,6 +41,7 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(m_arcadeDrivetrain);
     m_driveForTimeButton.whileTrue(m_moveForTime);
     m_bangBangButton.whileTrue(m_bangBangDrivetrain);
+    m_moveWithPIDButton.whileTrue(m_moveWithPID);
   }
 
   public Command getAutonomousCommand() {
