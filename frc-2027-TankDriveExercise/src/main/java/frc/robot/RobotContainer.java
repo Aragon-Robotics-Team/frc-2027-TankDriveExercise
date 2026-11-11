@@ -30,7 +30,7 @@ public class RobotContainer {
   private JoystickButton m_joystickButtonTime = new JoystickButton(m_xboxController, IOConstants.kJoystickAButtonID);
   private JoystickButton m_joystickButtonBangBang = new JoystickButton(m_xboxController, IOConstants.kJoystickBButtonID);
   private JoystickButton m_joystickButtonMoveWithPID = new JoystickButton(m_xboxController, IOConstants.kJoystickXButtonID);
-  private MoveWithPID m_moveWithPID = new MoveWithPID(m_drivetrain);
+  private MoveWithPID m_moveWithPID = new MoveWithPID(m_drivetrain, DrivetrainConstants.kTargetDistance);
 
   public RobotContainer() {
     configureBindings();
