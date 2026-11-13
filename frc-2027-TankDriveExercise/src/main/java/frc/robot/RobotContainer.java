@@ -31,7 +31,7 @@ public class RobotContainer {
   private JoystickButton m_bangBangButton = new JoystickButton(m_driverController, IOConstants.kBangBangButton);
   private BangBangDrivetrain m_bangBangDrivetrain = new BangBangDrivetrain(m_drivetrain, DrivetrainConstants.kTargetDistance); 
   private JoystickButton m_moveWithPIDButton = new JoystickButton(m_driverController, IOConstants.kMoveWithPIDButton);
-  private MoveWithPID m_moveWithPID = new MoveWithPID(m_drivetrain);
+  private MoveWithPID m_moveWithPID = new MoveWithPID(m_drivetrain, DrivetrainConstants.kTargetDistance);
   public RobotContainer() {
     configureBindings();
   }

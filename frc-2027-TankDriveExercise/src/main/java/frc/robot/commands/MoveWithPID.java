@@ -17,9 +17,11 @@ public class MoveWithPID extends Command {
   private double m_targetPosition;
   private double m_speed;
   private PIDController m_pidController = new PIDController(DrivetrainConstants.kP, DrivetrainConstants.kI, DrivetrainConstants.kD);
+  private double m_targetDistance;
   private TuningModule m_tuningModule = new TuningModule ("MoveWithPID", m_pidController);
-  public MoveWithPID(Drivetrain drivetrain) {
+  public MoveWithPID(Drivetrain drivetrain, double targetPosition) {
     m_drivetrain = drivetrain;
+    m_targetPosition = targetPosition;
     addRequirements(m_drivetrain);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -27,7 +29,7 @@ public class MoveWithPID extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_targetPosition = m_drivetrain.getFrontRightDistanceTraveled() + DrivetrainConstants.kTargetDistance;
+    m_targetPosition = m_drivetrain.getFrontRightDistanceTraveled() + m_targetDistance;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
